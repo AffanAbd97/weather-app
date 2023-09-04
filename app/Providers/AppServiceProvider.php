@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Inertia\Inertia;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Inertia::share('app', [
+            'name' => config('app.name'),
+            'url' => config('app.url'),
+            'env' => config('app.env'),
+            'api' => config('api.api'),
+        ]);
     }
 
     /**

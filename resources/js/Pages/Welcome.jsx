@@ -1,6 +1,10 @@
-import { Link, Head } from "@inertiajs/react";
+import { Link, Head,usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
+
+
 export default function Welcome(props) {
+    const {app} = usePage().props
+    console.log(app);
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
     const [currentData, setCurrentData] = useState([]);
@@ -51,14 +55,14 @@ export default function Welcome(props) {
     useEffect(() => {
         const getApiData = async (lat, lon) => {
             const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=9ae17905c4a2dc496b5467a1cf7d6648`
+                `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${app.api}`
             ).then((response) => response.json());
 
             setPosts(response);
         };
         const getCurrentData = async (lat, lon) => {
             const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=9ae17905c4a2dc496b5467a1cf7d6648`
+                `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${app.api}`
             ).then((response) => response.json());
 
             setCurrentData(response);
